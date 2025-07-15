@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { FaArrowRight, FaCheck } from "react-icons/fa6";
+import { FaArrowRight } from "react-icons/fa6";
 import Checkbox from "./Checkbox";
 import Input from "./Input";
 

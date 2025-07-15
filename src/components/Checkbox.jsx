@@ -1,3 +1,5 @@
+import { FaCheck } from "react-icons/fa6";
+
 export default function Checkbox({ name, checked, onChange, label, error }) {
   return (
     <div className="mt-4 text-sm text-white">
