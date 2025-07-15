@@ -26,7 +26,7 @@ export default function Input({
         onChange={onChange}
         onFocus={() => setIsFocused(true)}
         onBlur={() => setIsFocused(false)}
-        className={`w-full border-0 border-b-2 placeholder:text-gray-300 border-gray-300 py-2 pr-10 mb-2 bg-transparent focus:outline-none focus:border-white text-white`}
+        className={`w-full border-0 border-b-2 placeholder:text-gray-300 border-gray-300 py-2 pr-10 mb-2 bg-transparent focus:outline-none focus:border-b-4 focus:border-white text-white`}
       />
 
       {isDateType && (

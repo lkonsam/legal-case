@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { FaArrowRight } from "react-icons/fa6";
 import Checkbox from "./Checkbox";
 import Input from "./Input";
+import AutoExpandingTextarea from "./AutoExpandingTextarea";
 
 const ClaimForm = () => {
   const [formData, setFormData] = useState({
@@ -129,13 +130,11 @@ const ClaimForm = () => {
         </div>
 
         <div className="mt-4">
-          <textarea
+          <AutoExpandingTextarea
             name="story"
             value={formData.story}
             onChange={handleChange}
             placeholder="Tell us your story (optional)"
-            className="w-full border-0 border-b-2 border-gray-300  px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            rows="1"
           />
         </div>
 
