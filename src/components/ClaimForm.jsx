@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { FaCheck } from "react-icons/fa6";
+import { FaArrowRight, FaCheck } from "react-icons/fa6";
+import { MdOutlineCalendarToday } from "react-icons/md";
 
 const ClaimForm = () => {
   const [formData, setFormData] = useState({
@@ -57,12 +58,11 @@ const ClaimForm = () => {
   };
 
   return (
-    <div className="p-6 w-full max-w-xl">
-      <form
-        onSubmit={handleSubmit}
-        className="bg-[#2E4A7DAB] rounded-2xl  text-white shadow-xl px-5 py-15 max-w-2xl mx-auto text-sm md:text-base "
-      >
-        <h2 className="text-xl font-bold mb-4">Claim Form</h2>
+    <div className="w-full bg-[#2E4A7DAB] rounded-4xl  text-white shadow-xl px-5 py-15 text-sm md:text-base ">
+      <form onSubmit={handleSubmit}>
+        <h2 className="text-4xl font-semibold text-white mb-4 scale-y-110">
+          Claim Form
+        </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <Input
             name="firstName"
@@ -165,36 +165,58 @@ const ClaimForm = () => {
           name="humanCheck"
           checked={formData.humanCheck}
           onChange={handleChange}
-          label="Please check this box to verify you're a person."
+          label={
+            <>
+              Please check this box to verify you're a <br />
+              person.
+            </>
+          }
           error={errors.humanCheck}
         />
 
         <button
           type="submit"
-          className="font-semibold text-xl text-gray-950  bg-[#F5E7DA] px-6 py-2 rounded-xl w-full mt-5 border-0"
+          className="font-semibold text-xl text-gray-950  bg-[#F5E7DA] px-6 py-2 mb-5 rounded-xl w-full mt-5 border-0"
         >
-          Start your claim now
+          <span className="hidden lg:block">Start your claim now</span>
+          <span className="lg:hidden flex items-center justify-center gap-2">
+            Submit <FaArrowRight />
+          </span>
         </button>
       </form>
     </div>
   );
 };
 
-const Input = ({ name, label, value, onChange, type = "text", error }) => (
-  <div>
-    <input
-      name={name}
-      type={type}
-      placeholder={label}
-      value={value}
-      onChange={onChange}
-      className={`w-full border-0 border-b-2 placeholder:text-gray-300 border-gray-300 py-2 bg-transparent focus:outline-none focus:border-white ${
-        type === "date" ? "date-input" : ""
-      }`}
-    />
-    {error && <div className="text-red-500 text-xs mt-1">{error}</div>}
-  </div>
-);
+const Input = ({ name, label, value, onChange, type = "text", error }) => {
+  const [isFocused, setIsFocused] = useState(false);
+
+  // Dynamically switch input type to show placeholder for date
+  const inputType = type === "date" && !value && !isFocused ? "text" : type;
+
+  const isDateType = type === "date";
+
+  return (
+    <div className="relative">
+      <input
+        name={name}
+        type={inputType}
+        placeholder={label}
+        value={value}
+        onChange={onChange}
+        onFocus={() => setIsFocused(true)}
+        onBlur={() => setIsFocused(false)}
+        className={`w-full border-0 border-b-2 placeholder:text-gray-300 border-gray-300 py-2 pr-10 mb-2 bg-transparent focus:outline-none focus:border-white text-white`}
+      />
+
+      {isDateType && (
+        <MdOutlineCalendarToday className="absolute right-2 top-2 text-gray-400 pointer-events-none text-lg" />
+      )}
+
+      {error && <div className="text-red-500 text-xs mt-1">{error}</div>}
+    </div>
+  );
+};
 
 const Checkbox = ({ name, checked, onChange, label, error }) => (
   <div className="mt-4 text-sm text-white">
